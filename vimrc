@@ -1,5 +1,5 @@
 set encoding=utf-8
-colorscheme github
+colorscheme default
 set number
 set nocompatible
 syntax on
@@ -161,8 +161,8 @@ if has("autocmd")
       au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" 配置关闭所有tab快捷键
-nmap <leader>q : qall<cr>
+" force quit所有tab快捷键
+nmap <leader>q : qall!<cr>
 
 " 配置切换tab快捷键
 nmap <F6> : tabp<cr>
