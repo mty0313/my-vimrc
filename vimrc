@@ -76,12 +76,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 " Add all your plugins here
 Plugin 'croaky/vim-colors-github'
-Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'neocomplcache'
 Plugin 'tacahiroy/ctrlp-funky'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -105,9 +105,12 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 "close vim if the only window left open is a NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" Start NERDTree and put the cursor back in the other window.
+autocmd VimEnter * NERDTree | wincmd p
+
 
 "配置neocomplete
-let g:neocomplete#enable_at_startup = 1 
+let g:neocomplete#enable_at_startup = 1
 
 "配置Tagbar
 "设置宽度 位置
@@ -145,9 +148,12 @@ if executable('ag')
 endif
 
 " 配置vimpowerline
+set rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 let g:Powerline_symbols = 'fancy'
-set encoding=utf-8 
+set encoding=utf-8
 set laststatus=2
+set showtabline=2
+set t_Co=256
 
 " 配置ctrlp funky
 nnoremap <Leader>fu :CtrlPFunky<Cr>
@@ -161,24 +167,9 @@ if has("autocmd")
       au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" force quit所有tab快捷键
-nmap <leader>q : qall!<cr>
+" 配置关闭所有tab快捷键
+nmap <leader>q : qall<cr>
 
 " 配置切换tab快捷键
 nmap <F6> : tabp<cr>
 nmap <F7> : tabn<cr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
